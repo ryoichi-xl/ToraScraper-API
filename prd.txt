@@ -1,0 +1,5 @@
+Thing is I don't really know what to do now because I'm trying to understand the different ways images render. Like Jachi's site. it doesn't return what I want so I'm tryna see something
+
+Why not write what I get in cheerio into a html.txt
+
+Alright, great. In the meantime, let's see if I can clean up the code.
