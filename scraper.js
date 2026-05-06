@@ -2,19 +2,9 @@
 // X: https://x.com/ryoichi_xl
 // Github: https://github.com/ryoichi_xl
 
-import fs from 'fs/promises'
-import path from 'path'
-import * as cheerio from "cheerio"
-import { fileURLToPath } from 'url'
-import axios from 'axios'
-import { nanoid } from 'nanoid'
 import puppeteer from 'puppeteer'
 
-
-let __filename = fileURLToPath(import.meta.url)
-let __dirname = path.dirname(__filename)
 let sub;
-let subdir = nanoid(4);
 let images = [];
 let finalImages = []
 
