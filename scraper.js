@@ -4,12 +4,11 @@
 
 import puppeteer from 'puppeteer'
 
-let sub;
-let images = [];
-let finalImages = []
-
 
 async function scrapeImage(scrapeUrl) {
+    let sub;
+    let images = [];
+    let finalImages = [];
     const url = decodeURIComponent(scrapeUrl);
         const ext = [".png", ".jpg", ".jpeg", ".svg", ".webp"]
     try {
