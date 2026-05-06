@@ -51,6 +51,9 @@ async function scrapeImage(scrapeUrl) {
 
         for (let i = 0; i < images.length; i++) {
             sub  = resolveURL(images[i], url);
+            if (images[i].contains("?")) {
+                sub = images[i].split("?")[0]
+            }
             finalImages.push(sub)
         }
         return finalImages;

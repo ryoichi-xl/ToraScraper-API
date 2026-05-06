@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-# ToraScraper 🐯
-
-A headless image scraper built for backend devs. Point it at any URL and it scrapes every image off the page — handling SSR, CSR, and dynamic rendering via Puppeteer. No UI included. Built to be extended.
-
-> Created by [Ryoichi](https://github.com/ryoichi_xl) · [X](https://x.com/ryoichi_xl)
-
----
-
-## How It Works
-
-1. You POST a URL to the `/api/scrape` endpoint
-2. Puppeteer launches a headless browser and visits the page
-3. It grabs every `img` src and srcset from the DOM
-4. Images are downloaded and saved to a generated subfolder inside `/images`
-5. The image URLs are returned as JSON
-
-Supports `.jpg`, `.jpeg`, `.png`, `.svg`, and `.webp`.
-=======
 # ToraScraper API
 
 A lightweight REST API that scrapes and returns all image URLs from any given webpage. Built with Express & Puppeteer.
@@ -30,7 +11,6 @@ A lightweight REST API that scrapes and returns all image URLs from any given we
 - Resolves relative URLs to absolute paths
 - Rate limiting out of the box
 - CORS enabled for all origins
->>>>>>> 44826d0330e13bf12d44f591ee145ec7ea16d059
 
 ---
 
