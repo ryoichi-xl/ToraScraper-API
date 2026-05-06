@@ -16,13 +16,14 @@ let __dirname = path.dirname(__filename)
 let sub;
 let subdir = nanoid(4);
 let images = [];
+let finalImages = []
 
 
 async function scrapeImage(scrapeUrl) {
-    const url = scrapeUrl;
+    const url = decodeURIComponent(scrapeUrl);
         const ext = [".png", ".jpg", ".jpeg", ".svg", ".webp"]
     try {
-        const browser = await puppeteer.launch( {headless: false});
+        const browser = await puppeteer.launch( {headless: true});
         const page = await browser.newPage();
 
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
@@ -36,8 +37,10 @@ async function scrapeImage(scrapeUrl) {
             return allSrc.filter(src => src.match(ext));
         })
         // check if there's a contains function
+        await browser.close()
     } catch (err) {
         console.log(err.message)
+        return res.status(400).json({ message: "Invalid URL" });
     }
 
     function resolveURL(src, base) {
@@ -52,24 +55,9 @@ async function scrapeImage(scrapeUrl) {
 
         for (let i = 0; i < images.length; i++) {
             sub  = resolveURL(images[i], url);
-            if (!sub) continue;
-            const id = nanoid(5)
-
-        console.log(sub)
-            const basename = path.basename(sub);
-            const test = await axios.get(sub, { responseType: "arraybuffer", validateStatus: () => true });
-            if (test.status !== 200) continue;
-            const buffer = test.data;
-            let extname = ext.filter(e => images[i].includes(e))[0];
-            const name = id + extname;
-            await fs.mkdir('images/' + subdir, { recursive: true });
-            const filePath = path.join(__dirname, "images", name);
-            console.log(filePath); 
-            await fs.writeFile(filePath, buffer);
-            console.log("Image saved successfully.");
+            finalImages.push(sub)
         }
-        console.log("all images saved")
-        return images;
+        return finalImages;
 }
 
 export default scrapeImage

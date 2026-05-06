@@ -1,28 +1,31 @@
 // Created by Ryoichi
 // X: https://x.com/ryoichi_xl
 // Github: https://github.com/ryoichi_xl
-
 import express from 'express'
+import limiter from "./rateLimiter.js"
 import scrapeImage from "./scraper.js";
 import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(limiter)
 
 app.use(
     cors({
-        origin: "http://127.0.0.1:5500",
+        origin: "*",
     }),
     );
     app.use(express.json());
 
-    app.post("/api/scrape", async (req, res) => {
+    app.get("/api/url", async (req, res) => {
     try {
-        const url = req.body.url;
+        const url = encodeURIComponent(req.query.url);
+        console.log(url)
         const image = await scrapeImage(url);
         res.json({ image });
     } catch (err) {
         console.log(err.message);
+        return res.status(400).json({ message: "Invalid URL"} )
     }
 });
 
