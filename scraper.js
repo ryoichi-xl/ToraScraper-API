@@ -36,7 +36,7 @@ async function scrapeImage(scrapeUrl) {
         await browser.close()
     } catch (err) {
         console.log(err.message)
-        return res.status(400).json({ message: "Invalid URL" });
+        return [];    
     }
 
     function resolveURL(src, base) {
@@ -51,7 +51,7 @@ async function scrapeImage(scrapeUrl) {
 
         for (let i = 0; i < images.length; i++) {
             sub  = resolveURL(images[i], url);
-            if (images[i].contains("?")) {
+            if (images[i].includes("?")) {
                 sub = images[i].split("?")[0]
             }
             finalImages.push(sub)
