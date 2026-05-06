@@ -1,6 +1,6 @@
-# 🖼️ ToraScraper API
+# ToraScraper API
 
-A lightweight REST API that scrapes and returns all image URLs from any given webpage. Built with Express, Puppeteer, and Cheerio.
+A lightweight REST API that scrapes and returns all image URLs from any given webpage. Built with Express & Puppeteer.
 
 ---
 
@@ -97,12 +97,6 @@ GET /api/url?url=https://example.com
 | Axios      | HTTP requests                      |
 | nanoid     | Unique ID generation               |
 | cors       | Cross-origin resource sharing      |
-
----
-
-## Rate Limiting
-
-This API uses a rate limiter (configured in `rateLimiter.js`) to prevent abuse. Requests exceeding the limit will receive a `429 Too Many Requests` response.
 
 ---
 
