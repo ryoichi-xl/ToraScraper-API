@@ -28,8 +28,14 @@ async function scrapeImage(scrapeUrl) {
             const ext = /\.(jpg|png|svg|webp|jpeg)/i;
             const imgElements = Array.from(document.querySelectorAll("img"));
             const srcMap = imgElements.map(img => img.src);
-            const sercsetMap = imgElements.map(img => img.srcset);
-            const allSrc = [...srcMap, ...sercsetMap];
+            const srcsetMap = imgElements.flatMap((img) => {
+                if (!img.srcset) return [];
+
+                return img.srcset
+                    .split(",")
+                    .map((src) => src.trim().split(" ")[0]);
+            });
+            const allSrc = [...srcMap, ...srcsetMap];
             return allSrc.filter(src => src.match(ext));
         })
         // check if there's a contains function
