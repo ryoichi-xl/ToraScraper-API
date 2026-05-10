@@ -18,9 +18,28 @@ async function scrapeImage(scrapeUrl) {
     "--disable-setuid-sandbox",
     "--disable-dev-shm-usage",
     "--disable-gpu",
+    "--single-process",
+    "--no-first-run",
+    "--disable-extensions",
+    "--disable-plugins",
+    "--disable-default-apps",
+    "--disable-sync",
+    "--disable-translate",
+    "--disable-background-networking",
+    "--disable-breakpad",
+    "--disable-client-side-phishing-detection",
+    "--disable-component-extensions-with-background-pages",
+    "--disable-hang-monitor",
+    "--disable-popup-blocking",
+    "--disable-prompt-on-repost",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-device-discovery-notifications",
         ],
         });
         const page = await browser.newPage();
+        page.setDefaultNavigationTimeout(30000);
+        page.setDefaultTimeout(30000);
 
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
 
