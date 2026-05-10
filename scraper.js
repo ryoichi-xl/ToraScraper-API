@@ -39,6 +39,13 @@ async function scrapeImage(scrapeUrl) {
         });
         const page = await browser.newPage();
         await page.setCacheEnabled(false);
+        await page.setRequestInterception(true);
+        page.on('request', (request) => {
+            const headers = request.headers();
+            delete headers['if-none-match'];
+            delete headers['if-modified-since'];
+            request.continue({ headers });
+        });
         page.setDefaultNavigationTimeout(30000);
         page.setDefaultTimeout(30000);
 
