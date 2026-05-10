@@ -38,6 +38,7 @@ async function scrapeImage(scrapeUrl) {
         ],
         });
         const page = await browser.newPage();
+        await page.setCacheEnabled(false);
         page.setDefaultNavigationTimeout(30000);
         page.setDefaultTimeout(30000);
 
